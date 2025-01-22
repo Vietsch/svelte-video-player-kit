@@ -1,23 +1,31 @@
 {
-  "name": "@fullportdev/svelte-video-player-kit",
-  "version": "1.0.0",
-  "author": "Meigo Kukk",
+  "name": "@vietsch/svelte-video-player-kit",
+  "version": "1.0.2",
+  "author": "Volker von Vietsch / Meigo Kukk",
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/FullPortDEV/svelte-video-player-kit.git"
+    "url": "git+https://github.com/Vietsch/svelte-video-player-kit"
   },
   "description": "Basic video player component for svelte, SSR and sveltekit apps.",
-  "homepage": "https://github.com/FullPortDEV/svelte-video-player-kit",
+  "homepage": "https://github.com/Vietsch/svelte-video-player-kit",
   "license": "MIT",
+  "type": "module",
+  "exports": {
+    ".": {
+      "types": "./types/index.d.ts",
+      "svelte": "./src/index.js",
+      "import": "./dist/index.mjs",
+      "require": "./dist/svelte-video-player.js"
+    }
+  },
   "svelte": "./src/index.js",
   "module": "./dist/index.mjs",
   "main": "./dist/svelte-video-player.js",
   "types": "./types/index.d.ts",
   "scripts": {
     "build": "rollup -c",
-    "prepublishOnly": "yarn build"
+    "prepublishOnly": "npm run build"
   },
-  "dependencies": {},
   "devDependencies": {
     "@rollup/plugin-commonjs": "^20.0.0",
     "@rollup/plugin-node-resolve": "^13.0.4",
@@ -31,6 +39,9 @@
     "svelte": "^3.41.0",
     "svelte-preprocess": "^4.7.4"
   },
+  "peerDependencies": {
+    "svelte": "^3.41.0 || ^4.0.0"
+  },
   "keywords": [
     "svelte",
     "sveltekit",
@@ -42,5 +53,8 @@
     "src",
     "dist",
     "types"
-  ]
+  ],
+  "dependencies": {
+    "@vietsch/svelte-video-player-kit": "^x.x.x"
+  }
 }

@@ -52,6 +52,8 @@
 
 <div
   class="button"
+  role="button"
+  aria-label="Button"
   style="width:{offsetHeight}px; min-width:{offsetHeight}px; background-color:{$cfg.color}; border-color:{$cfg.focusColor}; border-radius:{round ? '9999px' : '10px'};"
   tabindex="0"
   bind:offsetHeight

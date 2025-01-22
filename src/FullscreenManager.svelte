@@ -1,6 +1,4 @@
 <script>
-  import { browser } from "$app/environment";
-
   import { onMount, onDestroy } from "svelte";
   import { screenfull } from "./libs/screenfull.js";
 
@@ -8,7 +6,10 @@
   export let isFullscreen;
   export let isFullscreenEnabled;
 
-  isFullscreenEnabled = screenfull.isEnabled;
+  // Browser check without $app/environment
+  const isBrowser = typeof window !== 'undefined';
+
+  isFullscreenEnabled = isBrowser && screenfull.isEnabled;
   if (isFullscreenEnabled) screenfull.on("change", onChange);
 
   function onChange(e) {
@@ -21,11 +22,14 @@
   }
 
   onMount(() => {
-    if (browser && window.screenfull) {
+    if (isBrowser && window.screenfull) {
+      // Any additional browser-specific initialization
     }
   });
 
   onDestroy(() => {
-    screenfull.off("change", onChange);
+    if (isFullscreenEnabled) {
+      screenfull.off("change", onChange);
+    }
   });
 </script>

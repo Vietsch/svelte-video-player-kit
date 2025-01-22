@@ -1,5 +1,5 @@
 <script lang="ts">
-  import VideoPlayer from 'svelte-video-player';
+  import AccessibleVideoPlayer from './AccessibleVideoPlayer.svelte';
   // import VideoPlayer from '../../src/VideoPlayer.svelte';
 
   const poster: string =
@@ -172,7 +172,7 @@
     undergo modification, and that the existing forms of life are the descendants by true generation of pre existing
     forms.
   </p>
-  <VideoPlayer
+  <AccessibleVideoPlayer
     width="2048"
     height="858"
     {poster}
@@ -192,7 +192,9 @@
     {loop}
     {skipSeconds}
     {controlsOnPause}
-    {timeDisplay} />
+    {timeDisplay}
+    role="region"
+    aria-label="Video Player" />
   <div class="config-video-player-grid">
     <div class="config config-grid">
       <label
@@ -242,7 +244,7 @@
     made for the sake of this, but it was the result of accident.
   </p>
 
-  <VideoPlayer width="1920" height="804" poster={poster2} source={source2} {playerBgColor} chunkBars skipSeconds="3" />
+  <AccessibleVideoPlayer width="1920" height="804" poster={poster2} source={source2} {playerBgColor} chunkBars skipSeconds="3" role="region" aria-label="Second Video Player" />
 
   <p>
     And in like manner as to other parts in which there appears to exist an adaptation to an end. Wheresoever,
@@ -252,14 +254,16 @@
     shadowed forth, but how little Aristotle fully comprehended the principle, is shown by his remarks on the formation
     of the teeth.), the first author who in modern times has treated it in a scientific spirit was Buffon.
     <span class="video-player-inline">
-      <VideoPlayer
+      <AccessibleVideoPlayer
         width="540"
         height={540}
         {playerBgColor}
         poster={poster_kaka}
         source={source_kaka}
         loop
-        skipSeconds="2" />
+        skipSeconds="2"
+        role="region"
+        aria-label="Kaka Walk Video" />
     </span>
     But as his opinions fluctuated greatly at different periods, and as he does not enter on the causes or means of the transformation
     of species, I need not here enter on details. Lamarck was the first man whose conclusions on the subject excited much
@@ -279,14 +283,14 @@
   </p>
 
   <div class="video-player-grid">
-    <VideoPlayer
+    <AccessibleVideoPlayer
       width="1920"
       height="804"
       poster="https://res.cloudinary.com/dvm02rtnk/image/upload/c_scale,q_auto,w_1024/v1628058523/blender/Spring_-_Blender_Open_Movie_dah072.jpg"
       source="https://res.cloudinary.com/dvm02rtnk/video/upload/v1628057422/blender/Spring_Blender_Open_Movie_1080p_nmkckb.mp4"
       playerBgColor="black"
       skipSeconds="1.5" />
-    <VideoPlayer
+    <AccessibleVideoPlayer
       width="1920"
       height="804"
       poster="https://res.cloudinary.com/dvm02rtnk/image/upload/c_scale,q_auto,w_1024/v1628058523/blender/Coffee_Run_-_Blender_Open_Movie_pkw8vs.jpg"

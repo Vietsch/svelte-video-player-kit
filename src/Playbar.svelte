@@ -135,6 +135,11 @@
 
 <div
   class="playbar"
+  role="slider"
+  aria-valuemin="0"
+  aria-valuemax="1"
+  aria-valuenow={_currentTimePercentage}
+  aria-label="Playback progress"
   tabindex="0"
   bind:this={playbarElement}
   on:pointerdown={onPointerDown}

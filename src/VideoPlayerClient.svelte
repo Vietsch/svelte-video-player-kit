@@ -228,6 +228,18 @@
   function togglePause() {
     paused = !paused;
   }
+
+  function onPlayerKeyDown(e) {
+    if (currentVideo !== videoElement) return;
+    
+    switch (e.code) {
+      case 'Space':
+      case 'Enter':
+        e.preventDefault(); // Prevent default space/enter behavior
+        togglePause();
+        break;
+    }
+  }
 </script>
 
 <!--------------------------------------------------------------------------------------------------------------------
@@ -282,11 +294,14 @@
   {:then}
     <div
       id="video-player-{uid()}"
+      role="application"
+      aria-label="Video Player"
       tabindex={isVideoData ? '0' : '-1'}
       bind:this={videoPlayerElement}
       on:pointerover={onPlayerPointerOver}
       on:pointerout={onPlayerPointerOut}
-      on:pointerup={onPlayerPointerUp}>
+      on:pointerup={onPlayerPointerUp}
+      on:keydown={onPlayerKeyDown}>
       <video
         {width}
         {height}
@@ -312,7 +327,12 @@
       </video>
 
       {#if poster && isPosterVisible}
-        <Poster src={poster} />
+        <div 
+          role="img" 
+          aria-label="Video Poster"
+        >
+          <Poster src={poster} />
+        </div>
       {/if}
 
       <Controls>

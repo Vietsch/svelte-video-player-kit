@@ -85,6 +85,11 @@
 
 <div
   class="slider"
+  role="slider"
+  aria-valuemin="0"
+  aria-valuemax="1"
+  aria-valuenow={value}
+  aria-label="Slider"
   style="max-width:{width}; margin:0 {marginX};"
   tabindex="0"
   bind:this={sliderElement}
