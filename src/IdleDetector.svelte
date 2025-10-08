@@ -1,5 +1,5 @@
 <script>
-  import { onDestroy } from "svelte";
+  import { onDestroy, onMount } from "svelte";
   import debounce from "./libs/debounce.js";
 
   export let isIdle = false;
@@ -21,6 +21,10 @@
     250,
     true
   );
+
+  onMount(() => {
+    setIdleTimeout();
+  });
 
   onDestroy(() => {
     clearTimeout(timeout);

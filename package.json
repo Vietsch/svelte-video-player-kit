@@ -53,8 +53,5 @@
     "src",
     "dist",
     "types"
-  ],
-  "dependencies": {
-    "@vietsch/svelte-video-player-kit": "^x.x.x"
-  }
+   ]
 }

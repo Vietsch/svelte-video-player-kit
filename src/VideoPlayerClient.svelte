@@ -52,6 +52,7 @@
   export let aspectRatio;
   export let controlsOnPause;
   export let timeDisplay;
+  export let showFullscreen = true;
 
   $: _sources = prepareVideoSources(source);
   $: _skipSeconds = parseFloat(skipSeconds);
@@ -296,7 +297,6 @@
       id="video-player-{uid()}"
       role="application"
       aria-label="Video Player"
-      tabindex={isVideoData ? '0' : '-1'}
       bind:this={videoPlayerElement}
       on:pointerover={onPlayerPointerOver}
       on:pointerout={onPlayerPointerOut}
@@ -352,7 +352,7 @@
           {/if}
           <VolumeButton on:pointerup={onVolumeButtonPointerUp} {muted} />
           <VolumeControl bind:volume />
-          {#if isFullscreenEnabled}
+          {#if isFullscreenEnabled && showFullscreen}
             <FullscreenButton on:pointerup={onFullscreenButtonPointerUp} {isFullscreen} />
           {/if}
         </BottomControls>

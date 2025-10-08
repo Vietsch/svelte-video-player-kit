@@ -28,6 +28,7 @@
   export let skipSeconds = 5;
   export let controlsOnPause = true;
   export let timeDisplay = false;
+  export let showFullscreen = true;
 
   $: _width = parseInt(width);
   $: _height = parseInt(height);
@@ -56,7 +57,8 @@
     {skipSeconds}
     {aspectRatio}
     {controlsOnPause}
-    {timeDisplay} />
+    {timeDisplay}
+    {showFullscreen} />
 {:else}
   <VideoPlayerServer {playerBgColor} {borderRadius} {aspectRatio} />
 {/if}

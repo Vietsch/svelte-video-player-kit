@@ -13,4 +13,4 @@
   }
 </style>
 
-<img {src} class="poster" alt="poster" onerror="this.style.display='none'" />
+<img {src} class="poster" alt="poster" on:error={(e) => { e.currentTarget.style.display = 'none'; }} />

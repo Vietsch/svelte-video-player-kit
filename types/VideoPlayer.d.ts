@@ -121,6 +121,12 @@ export interface VideoPlayerProps {
    * @default false
    */
   timeDisplay?: boolean;
+
+  /**
+   * Show the fullscreen button
+   * @default true
+   */
+  showFullscreen?: boolean;
 }
 
 export default class VideoPlayer extends SvelteComponentTyped<VideoPlayerProps, {}, {}> {}
