@@ -1,6 +1,6 @@
 {
   "name": "@vietsch/svelte-video-player-kit",
-  "version": "1.0.2",
+  "version": "1.0.3",
   "author": "Volker von Vietsch / Meigo Kukk",
   "repository": {
     "type": "git",
@@ -53,5 +53,5 @@
     "src",
     "dist",
     "types"
-   ]
+  ]
 }
