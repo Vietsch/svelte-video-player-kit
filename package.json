@@ -1,35 +1,14 @@
 {
-  "name": "@fullportdev/svelte-video-player-kit",
-  "version": "1.0.0",
-  "author": "Meigo Kukk",
+  "name": "@vietsch/svelte-video-player-kit",
+  "version": "2.0.0",
+  "type": "module",
+  "author": "Volker von Vietsch",
+  "description": "Basic video player component for Svelte, SSR and SvelteKit apps.",
+  "homepage": "https://github.com/vietsch/svelte-video-player-kit",
+  "license": "MIT",
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/FullPortDEV/svelte-video-player-kit.git"
-  },
-  "description": "Basic video player component for svelte, SSR and sveltekit apps.",
-  "homepage": "https://github.com/FullPortDEV/svelte-video-player-kit",
-  "license": "MIT",
-  "svelte": "./src/index.js",
-  "module": "./dist/index.mjs",
-  "main": "./dist/svelte-video-player.js",
-  "types": "./types/index.d.ts",
-  "scripts": {
-    "build": "rollup -c",
-    "prepublishOnly": "yarn build"
-  },
-  "dependencies": {},
-  "devDependencies": {
-    "@rollup/plugin-commonjs": "^20.0.0",
-    "@rollup/plugin-node-resolve": "^13.0.4",
-    "autoprefixer": "^10.3.1",
-    "postcss": "^8.3.6",
-    "rollup": "^2.55.1",
-    "rollup-plugin-css-only": "^3.1.0",
-    "rollup-plugin-delete": "^2.0.0",
-    "rollup-plugin-svelte": "^7.1.0",
-    "rollup-plugin-terser": "^7.0.2",
-    "svelte": "^3.41.0",
-    "svelte-preprocess": "^4.7.4"
+    "url": "git+https://github.com/vietsch/svelte-video-player-kit.git"
   },
   "keywords": [
     "svelte",
@@ -38,9 +17,41 @@
     "video",
     "player"
   ],
-  "files": [
-    "src",
-    "dist",
-    "types"
-  ]
+  "svelte": "./src/lib/index.js",
+  "types": "./index.d.ts",
+  "exports": {
+    ".": {
+      "svelte": "./src/lib/index.js",
+      "types": "./index.d.ts",
+      "default": "./index.js"
+    }
+  },
+  "scripts": {
+    "dev": "vite dev",
+    "build": "vite build",
+    "preview": "vite preview",
+    "sync": "svelte-kit sync",
+    "check": "npm run sync --silent && svelte-check",
+    "check:watch": "svelte-check --watch",
+    "package": "svelte-package",
+    "prepublishOnly": "npm run check && npm run package"
+  },
+  "peerDependencies": {
+    "svelte": "^5.0.0"
+  },
+  "devDependencies": {
+    "@opentelemetry/api": "^1.9.0",
+    "@sveltejs/adapter-auto": "^3.3.1",
+    "@sveltejs/kit": "^2.5.0",
+    "@sveltejs/package": "^2.3.2",
+    "@types/node": "^22.8.6",
+    "sass-embedded": "^1.93.2",
+    "svelte": "^5.1.0",
+    "svelte-check": "^4.0.2",
+    "typescript": "^5.4.0",
+    "vite": "^6.3.0"
+  },
+  "publishConfig": {
+    "directory": "package"
+  }
 }

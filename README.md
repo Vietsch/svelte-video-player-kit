@@ -1,35 +1,51 @@
 # FullPortDEV Fork of Svelte Video Player Kit
 
-## Reason for Fork
-the repo hadn't updated `$app/env` to `$app/environment` to reflect changes in SvelteKit
-
-## Overview
-This is a convenience fork of the original package which had some issues with SSR and sveltekit at the time this publishing. 
-
-[https://github.com/meigo/svelte-video-player
-](https://github.com/meigo/svelte-video-player)
-
-All other credits go to the original author of the package.
+## Why this fork exists
+The original package was missing fixes for modern SvelteKit and SSR scenarios. This fork keeps the component updated and now ships with a Svelte 5 / SvelteKit 2 toolchain powered by `@sveltejs/package`.
 
 ## Installation
 
 ```bash
-pnpm install -D svelte-video-player-kit
-# OR
-npm install svelte-video-player-kit
+npm install @fullportdev/svelte-video-player-kit
+# or
+pnpm add @fullportdev/svelte-video-player-kit
+# or
+yarn add @fullportdev/svelte-video-player-kit
 ```
 
-## Basic video player component for svelte, sapper and legacy apps.
+## Development workflow
+- Requires Node 18.13+ (Node 20 recommended; see `.nvmrc`).
+- `npm run dev` – run the local SvelteKit playground at `http://localhost:5173`
+- `npm run sync` – regenerate SvelteKit's build artifacts (run automatically before `npm run check`)
+- `npm run check` – type and template checks
+- `npm run package` – build the distributable package into `./package`
+- `npm run build` – Vite production build for the playground (not required for publishing)
+- `npm run prepublishOnly` – runs `check` + `package` before publishing
 
-Controls are tabbable and respond to key presses (enter/space/arrows) where applicable.
+Publishing now uses `publishConfig.directory = "package"`, so `npm publish` from the repo root will publish the generated package after `npm run package` completes.
 
-Starting a player will pause previously playing video player instance.
+## Usage
 
-Fullscreen functionality is disabled on iPhone, other than that should function fairly smoothly in both desktop and mobile browsers.
+Import the bundled `VideoPlayer` Svelte component from the package. The component is SSR‑safe and works in Svelte 3/4/5 as well as SvelteKit 2+ projects.
 
-## Demo
+```svelte
+<script>
+  import VideoPlayer from '@fullportdev/svelte-video-player-kit';
 
-https://svelte-video-player.netlify.app/
+  const poster = 'https://www.server.com/poster.jpg';
+  const source = [
+    'https://www.server.com/video.webm',
+    'https://www.server.com/video.mp4',
+    'https://www.server.com/video.ogv'
+  ];
+</script>
+
+<VideoPlayer {poster} {source} width={1920} height={1080} chunkBars />
+```
+
+A live playground is included in `src/routes/+page.svelte` when running `npm run dev`.
+
+> **Note:** Legacy UMD builds previously available on unpkg are no longer produced. If you need that distribution format, stay on an older release.
 
 ## Props
 
@@ -49,76 +65,14 @@ https://svelte-video-player.netlify.app/
 | barsBgColor     | <code>string</code>                 | <code>'white'</code>   | Background color of playbar and volume slider tracks                                                        |
 | iconColor       | <code>string</code>                 | <code>'white'</code>   | Color of button icons                                                                                       |
 | bufferedColor   | <code>string</code>                 | <code>'#FF9600'</code> | Color of buffered chunks                                                                                    |
-| borderRadius    | <code>string</code>                 | <code>'8px'</code>     | Rounded corner radius of the player.                                                                        |
+| borderRadius    | <code>string</code>                 | <code>'8px'</code>     | Rounded corner radius of the player                                                                         |
 | skipSeconds     | <code>string &#124; number</code>   | <code>5</code>         | Skipping time in seconds                                                                                    |
 | chunkBars       | <code>boolean</code>                | <code>false</code>     | Display overlay with buffered and played parts of video                                                     |
 | loop            | <code>boolean</code>                | <code>false</code>     | Play video in loop                                                                                          |
 | controlsOnPause | <code>boolean</code>                | <code>true</code>      | Show control bar when video is paused                                                                       |
 | timeDisplay     | <code>boolean</code>                | <code>false</code>     | Display current time beside playbar                                                                         |
 
-## Usage
+If your video aspect ratio differs from the default 16:9, provide `width` and `height` to prevent layout shift. The displayed size is controlled by the player's container width.
 
-If aspect ratio of the video is other than default 16:9 provide `width` and `height` props to player for calculating aspect ratio to prevent [CLS](https://web.dev/cls/).
-Real size of video player will be determined by it's parent element.
-
-### Import directly to svelte or sapper apps
-
-See [Example App.svelte](./example/src/App.svelte).
-
-```html
-<script>
-  import VideoPlayer from 'svelte-video-player';
-
-  const poster = 'https://www.server.com/poster.jpg';
-  const source = [
-    'https://www.server.com/video.webm',
-    'https://www.server.com/video.mp4',
-    'https://www.server.com/video.ogv',
-  ];
-</script>
-
-<VideoPlayer {poster} {source} />;
-```
-
-```js
-<VideoPlayer poster="poster_url" source="video_url" />
-```
-
-```js
-<VideoPlayer width="500" height="500" poster="./local_poster.jpg" source="./local_video.mp4" loop />
-```
-
-### For legacy apps load prebuilt script and stylesheet from unpkg.com
-
-Example: https://codepen.io/meigo-kukk/pen/yLVMZBO
-
-```html
-<html>
-  <head>
-    <link rel="stylesheet" href="https://unpkg.com/svelte-video-player@latest/dist/svelte-video-player.css" />
-    <script src="https://unpkg.com/svelte-video-player@latest/dist/svelte-video-player.js"></script>
-
-    <script>
-      function initPlayer() {
-        let player = new VideoPlayer({
-          target: document.getElementById('player'),
-          props: {
-            poster:
-              'https://res.cloudinary.com/animaly/image/upload/c_scale,w_960/v1608783923/ntiiorkrkxba6kmooa4u.gif',
-            source:
-              'https://res.cloudinary.com/animaly/video/upload/ac_aac,vc_h264/v1608783907/xixhbu5v9aawqqgiafri.mp4',
-            controlsHeight: '55px',
-            centerIconSize: '60px',
-            color: 'deepskyblue',
-          },
-        });
-      }
-    </script>
-  </head>
-  <body onload="initPlayer()" style="background-color:#333">
-    <div style="max-width: 600px; margin: 0 auto;">
-      <div id="player" />
-    </div>
-  </body>
-</html>
-```
+## Credits
+Original component by [Meigo Kukk](https://github.com/meigo). This fork simply keeps the package aligned with the latest Svelte ecosystem.
